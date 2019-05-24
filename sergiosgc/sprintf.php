@@ -3,7 +3,7 @@ namespace sergiosgc;
 function sprintf($format) {
     $args = func_get_args();
     array_shift($args);
-    if (count($args) && is_array($args[count($args) - 1])) $namedArguments = array_pop($args); else $namedArguments = [];
+    if (count($args) && (is_array($args[count($args) - 1]) || $args[count($args) - 1] instanceof \ArrayAccess)) $namedArguments = array_pop($args); else $namedArguments = [];
     $offset = 0;
     $sprintfArgs = [];
     while( ($convertionOffset = strpos($format, '%', $offset)) !== FALSE ) {
