@@ -1,5 +1,11 @@
 <?php
 namespace sergiosgc;
+function printf() {
+    $args = func_get_args();
+    $result = call_user_func_array('\sergiosgc\sprintf', $args);
+    print($result);
+    return strlen($result);
+}
 function sprintf($format) {
     $args = func_get_args();
     array_shift($args);
