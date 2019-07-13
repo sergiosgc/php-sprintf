@@ -14,12 +14,12 @@ function sprintf($format) {
     foreach ($matches as $i => $match) $matches[$i] = array_filter($match, "is_string", ARRAY_FILTER_USE_KEY);
     $result = '';
     foreach ($matches as $match) {
-        if (strlen($match['doublepercent'])) {
+        if (array_key_exists('doublepercent', $match) && strlen($match['doublepercent'])) {
             $result .= '%%';
-        } elseif (strlen($match['nonvar'])) {
+        } elseif (array_key_exists('nonvar', $match) && strlen($match['nonvar'])) {
             $result .= $match['nonvar'];
-        } elseif (strlen($match['var'])) {
-            if (!isset($namedArguments[$match['var']])) throw new \Exception('Named convertion specifier not found: ' . $match['var']);
+        } elseif (array_key_exists('var', $match) && strlen($match['var'])) {
+            if (!array_key_exists($match['var'], $namedArguments)) throw new \Exception('Named convertion specifier not found: ' . $match['var']);
             $result .= $match['preceding'] . $namedArguments[$match['var']] . $match['succeeding'];
         } else {
             if (0 == strlen(implode('', $match))) continue;
