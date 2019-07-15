@@ -1,6 +1,6 @@
 # php-sprintf
 
-`\sergiosgc\sprintf` adds to sprintf a new conversion specifier for named arguments. 
+`\sergiosgc\sprintf` adds to `sprintf` a new conversion specifier for named arguments. 
 In regular sprintf, arguments are applied to conversion specifiers using order only: 
 
     $result = sprintf('%d is %s in %s', $target, $role, $container);
