@@ -5,7 +5,7 @@ In regular sprintf, arguments are applied to conversion specifiers using order o
 
     $result = sprintf('%d is %s in %s', $target, $role, $container);
     
-\sergiosgc\sprintf allows you to use named conversion specifiers:
+`\sergiosgc\sprintf` allows you to use named conversion specifiers:
 
     $result = sprintf('%<target> is %<role> in %<container>', [ 'target' => $target, 'role' => $role, 'container' => $container ]);
     
