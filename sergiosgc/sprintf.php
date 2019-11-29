@@ -29,3 +29,16 @@ function sprintf($format) {
     array_unshift($args, $result);
     return \call_user_func_array('\sprintf', $args);
 }
+function sprintf_conversion_specifiers_in($format) {
+    if (!preg_match_all('_(?:(?<doublepercent>%%)|(?<preceding>.*?(?:^|[^%]))%<(?<var>[^>]*)>(?<succeeding>.*?)|(?<nonvar>[^%]*%?))_', $format, $matches, PREG_SET_ORDER)) return [];
+    foreach ($matches as $i => $match) $matches[$i] = array_filter($match, "is_string", ARRAY_FILTER_USE_KEY);
+    $result = [];
+    foreach ($matches as $match) {
+        if (array_key_exists('doublepercent', $match) && strlen($match['doublepercent'])) {
+        } elseif (array_key_exists('nonvar', $match) && strlen($match['nonvar'])) {
+        } elseif (array_key_exists('var', $match) && strlen($match['var'])) {
+            $result[] = $match['var'];
+        }
+    }
+    return $result;
+}
