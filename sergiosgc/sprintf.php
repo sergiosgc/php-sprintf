@@ -19,7 +19,7 @@ function sprintf($format) {
         } elseif (array_key_exists('nonvar', $match) && strlen($match['nonvar'])) {
             $result .= $match['nonvar'];
         } elseif (array_key_exists('var', $match) && strlen($match['var'])) {
-            if (!array_key_exists($match['var'], $namedArguments)) throw new \Exception('Named convertion specifier not found: ' . $match['var']);
+            if (!array_key_exists($match['var'], $namedArguments)) throw new MissingConversionSpecifierException('Named convertion specifier not found: ' . $match['var'] . ' in format ' . $format);
             $result .= $match['preceding'] . $namedArguments[$match['var']] . $match['succeeding'];
         } else {
             if (0 == strlen(implode('', $match))) continue;
