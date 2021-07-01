@@ -15,6 +15,7 @@
         "php": ">=7.0.0"
     },
     "autoload": {
-        "files": ["sergiosgc/sprintf.php"]
+        "files": ["sergiosgc/sprintf.php"],
+        "psr-4": {"sergiosgc\\": "sergiosgc/"}
     }
 }
