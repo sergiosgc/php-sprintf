@@ -1,5 +1,6 @@
 <?php
 namespace sergiosgc;
+if (!function_exists('sergiosgc\printf')) {
 function printf() {
     $args = func_get_args();
     $result = call_user_func_array('\sergiosgc\sprintf', $args);
@@ -41,4 +42,5 @@ function sprintf_conversion_specifiers_in($format) {
         }
     }
     return $result;
+}
 }
