@@ -28,7 +28,7 @@ function sprintf($format) {
         }
     }
     array_unshift($args, $result);
-    return \call_user_func_array('\sprintf', $args);
+    return \sprintf(...$args);
 }
 function sprintf_conversion_specifiers_in($format) {
     if (!preg_match_all('_(?:(?<doublepercent>%%)|(?<preceding>.*?(?:^|[^%]))%<(?<var>[^>]*)>(?<succeeding>.*?)|(?<nonvar>[^%]*%?))_', $format, $matches, PREG_SET_ORDER)) return [];
