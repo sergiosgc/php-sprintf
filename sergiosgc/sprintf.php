@@ -7,9 +7,7 @@ function printf() {
     print($result);
     return strlen($result);
 }
-function sprintf($format) {
-    $args = func_get_args();
-    array_shift($args);
+function sprintf($format, ...$args) {
     if (count($args) && (is_array($args[count($args) - 1]) || $args[count($args) - 1] instanceof \ArrayAccess)) $namedArguments = array_pop($args); else $namedArguments = [];
     if (!preg_match_all('_(?:(?<doublepercent>%%)|(?<preceding>.*?(?:^|[^%]))%<(?<var>[^>]*)>(?<succeeding>.*?)|(?<nonvar>[^%]*%?))_', $format, $matches, PREG_SET_ORDER)) throw new \Exception('Error matching format regex');
     foreach ($matches as $i => $match) $matches[$i] = array_filter($match, "is_string", ARRAY_FILTER_USE_KEY);
@@ -27,6 +25,8 @@ function sprintf($format) {
             throw new \Exception('Unexpected match in format');
         }
     }
+    // If it looks like a valid \sprintf call, chain to \sprintf, otherwise just return the result so far
+    if (count($args) < 1+preg_match_all('/(^%|%$|[^%]%[^%])/', $result)) return $result;
     array_unshift($args, $result);
     return \sprintf(...$args);
 }
