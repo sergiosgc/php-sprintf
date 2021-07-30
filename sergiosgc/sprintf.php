@@ -26,7 +26,7 @@ function sprintf($format, ...$args) {
         }
     }
     // If it looks like a valid \sprintf call, chain to \sprintf, otherwise just return the result so far
-    if (count($args) < 1+preg_match_all('/(^%|%$|[^%]%[^%])/', $result)) return $result;
+    if (count($args) == 0 || count($args) < preg_match_all('/(^%|%$|[^%]%[^%])/', $result)) return $result;
     array_unshift($args, $result);
     return \sprintf(...$args);
 }
